@@ -17,7 +17,7 @@ require('dotenv').config();
 // Define the MySQL connection parameters
 let connection = mysql.createConnection({
     host: process.env.DB_HOST,
-    port: 3306,
+    port: 3000,
 
     // Your username
     user: process.env.DB_USER,
@@ -66,12 +66,12 @@ app.post("/api/waitlist", function (req, res) {
 app.post("/api/tables", function (req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
-    var newFriend = req.body;
+    var newRes = req.body;
 
-    connection.query(`INSERT INTO hotRestaurantApp (res_name, email, phone, unique_id) VALUES`, function (error, results, fields) {
+    connection.query(`INSERT INTO hotRestaurantApp (res_name, email, phone, customer_id) VALUES '${newFriend.name}', ${newFriend.email}', ${newFriend.phone}, '${newFriend.customer - id}'`, function (error, results, fields) {
         if (error) throw error;
-        console.log('deleted ' + results.affectedRows + ' rows');
-    })
+        console.log('added row ');
+    });
 
     // Using a RegEx Pattern to remove spaces from newCharacter
     // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
@@ -86,12 +86,5 @@ app.post("/api/tables", function (req, res) {
 
 const PORT = process.env.port || 3000;
 
-<<<<<<< HEAD
+
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-=======
-<<<<<<< HEAD
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-=======
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
->>>>>>> dc396a7ba3d2decb38fe62deaeba2eac8cd9434e
->>>>>>> 95aff71bed9b386e5b1fa7ed698b137b336ffd42

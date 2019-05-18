@@ -13,7 +13,7 @@ CREATE TABLE reservations
     email VARCHAR
     (45) NULL,
     phone INT NULL,
-    uniuque_id VARCHAR
+    customer_id VARCHAR
     (45) NULL,
     PRIMARY KEY
     (res_id)
