@@ -17,6 +17,7 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="./style.css">
   </head>
 
   <body>
@@ -50,6 +51,87 @@
           </div>
         </div>
       </div>
+      
+ <script type="text/javascript">
+
+      function listTables() {
+        // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+        $.ajax({ url: "/api/tables", method: "GET" }).then(function(tableData) {
+          // Here we then log the tableData to console, where it will show up as an object.
+          console.log(tableData);
+          console.log("------------------------------------");
+
+          // Loop through and display each of the customers
+          for (var i = 0; i < tableData.length; i++) {
+            // Get a reference to the tableList element and populate it with tables
+            var tableList = $("#tableList");
+
+            // Then display the fields in the HTML (Section Name, Date, URL)
+            var listItem = $("<li class='list-group-item mt-4'>");
+
+            listItem.append(
+              $("<h2>").text("Table #" + (i + 1)),
+              $("<hr>"),
+              $("<h2>").text("ID: " + tableData[i].customerID),
+              $("<h2>").text("Name: " + tableData[i].customerName),
+              $("<h2>").text("Email: " + tableData[i].customerEmail),
+              $("<h2>").text("Phone: " + tableData[i].phoneNumber)
+            );
+
+            tableList.append(listItem);
+          }
+        });
+      }
+
+      function listWaitList() {
+        // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+        $.ajax({ url: "/api/waitlist", method: "GET" }).then(function(
+          waitData
+        ) {
+          // Log the waitlistData to console.
+          console.log(waitData);
+          console.log("------------------------------------");
+
+          // Loop through and display each of the customers
+          for (var i = 0; i < waitData.length; i++) {
+            // Get a reference to the waitList element and populate it with tables
+            var waitList = $("#waitList");
+
+            // Then display the fields in the HTML (Section Name, Date, URL)
+            var listItem = $("<li class='list-group-item mt-4'>");
+
+            listItem.append(
+              $("<h2>").text("Table #" + (i + 1)),
+              $("<hr>"),
+              $("<h2>").text("ID: " + waitData[i].customerID),
+              $("<h2>").text("Name: " + waitData[i].customerName),
+              $("<h2>").text("Email: " + waitData[i].customerEmail),
+              $("<h2>").text("Phone: " + waitData[i].phoneNumber)
+            );
+
+            waitList.append(listItem);
+          }
+        });
+      }
+
+        // This function resets all of the data in our tables. This is intended to let you restart a demo.
+        function clearTable() {
+        alert("Clearing...");
+
+        // Clear the tables on the server and then empty the elements on the client
+        $.ajax({ url: "/api/clear", method: "POST" }).then(function() {
+          $("#waitList").empty();
+          $("#tableList").empty();
+        });
+      }
+
+      $("#clear").on("click", clearTable);
+
+      // Run listTables and listWaitList functions
+      listTables();
+      listWaitList();
+      </script>
+
 
       <footer class="footer">
         <div class="container">
