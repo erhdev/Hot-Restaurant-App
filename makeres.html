@@ -11,8 +11,19 @@
     <title>Make Your Reservation</title>
   </head>
   <body>
-    <p>Let's get it done</p>
+    <div class = 'container'>
+    <div class = 'jumbotron'>
+        <h1>Make your reservations!</h1>
+    </div>
 
+    Name the reservations will be under: <input type = 'text' id='resname'><br>
+    Email: <input type = 'text' id = 'email'><br>
+    Phone #: <input type = 'text' id = 'phnumber'><br>
+    Unique ID: <input type = 'text' id = 'ID'><br>
+    Primary Key: <input type = 'text' id = 'key'> <br><br>
+
+    <button id='makeres'>Finalize your reservation</button>
+    </div>
  
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -29,5 +40,19 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
         crossorigin="anonymous">
     </script>
+    <script>
+        $('#makeres').on(function(event) {
+            event.preventDefault();
+            var newReservation = {
+                name: $('#resname').val().trim(),
+                email: $('#email').val().trim(),
+                phone: $('#phnumber').val().trim(),
+                ID: $('#ID').val().trim(),
+                PKey: $('#key').val().trim(),
+            }
+            $.post("/reserve", newReservation).then(function(data) {console.log('Reservation Added')  })
+        })
+    </script>
+    </body>
   </body>
 </html>
