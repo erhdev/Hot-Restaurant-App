@@ -81,4 +81,8 @@ app.post("/api/tables", function (req, res) {
 
 const PORT = process.env.port || 3000;
 
+<<<<<<< HEAD
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+=======
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+>>>>>>> dc396a7ba3d2decb38fe62deaeba2eac8cd9434e
