@@ -50,7 +50,7 @@
                 ID: $('#ID').val().trim(),
                 PKey: $('#key').val().trim(),
             }
-            $.post("/", newReservation).then(function(data) {console.log('Reservation Added')  })
+            $.post("/reserve", newReservation).then(function(data) {console.log('Reservation Added')  })
         })
     </script>
     </body>
