@@ -1,4 +1,6 @@
 //const http = require('http');
+require('dotenv').config();
+
 const path = require('path');
 const nodemon = require('nodemon');
 //const members = require('./app/data/friends');
@@ -7,7 +9,6 @@ const express = require('express');
 const app = express();
 
 const mysql = require('mysql');
-require('dotenv').config();
 
 // function Queries() {
 // this.
@@ -17,7 +18,6 @@ require('dotenv').config();
 // Define the MySQL connection parameters
 let connection = mysql.createConnection({
     host: process.env.DB_HOST,
-    port: 3000,
 
     // Your username
     user: process.env.DB_USER,
@@ -26,6 +26,7 @@ let connection = mysql.createConnection({
     password: process.env.DB_PASS,
     database: 'hotRestaurantApp'
 });
+
 
 
 
@@ -67,20 +68,25 @@ app.post("/api/tables", function (req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
     var newRes = req.body;
+    console.log(newRes);
 
-    connection.query(`INSERT INTO hotRestaurantApp (res_name, email, phone, customer_id) VALUES '${newFriend.name}', ${newFriend.email}', ${newFriend.phone}, '${newFriend.customer - id}'`, function (error, results, fields) {
+    var query = `INSERT INTO reservations (res_name, email, phone, customer_id) VALUES ('${newRes.name}', '${newRes.email}', ${newRes.phone}, '${newRes.ID}')`;
+    console.log(query);
+    connection.query(query, function (error, results, fields) {
         if (error) throw error;
-        console.log('added row ');
+        console.log('added row ', results);
+        res.json(newRes);
+        connection.end();
     });
 
     // Using a RegEx Pattern to remove spaces from newCharacter
     // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-    newFriend.routeName = newFriend.name.replace(/\s+/g, "").toLowerCase();
+    //newFriend.routeName = newFriend.name.replace(/\s+/g, "").toLowerCase();
 
 
 
-    members.push(newFriend);
-    res.json(matchedFriend);
+    // members.push(newFriend);
+    ;
 });
 
 
