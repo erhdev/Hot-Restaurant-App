@@ -40,7 +40,7 @@
             <div class="panel-heading">
               <h4 class="panel-title">Current Reservations</h4>
             </div>
-            <div class="panel-body" id="tableList"></div>
+            <div class="panel-body" id="tableSection"></div>
           </div>
 
           <div class="panel panel-default">
@@ -53,6 +53,7 @@
       </div>
       
  <script type="text/javascript">
+
       function listTables() {
         // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
         $.ajax({ url: "/api/tables", method: "GET" }).then(function(tableData) {
@@ -87,7 +88,7 @@
         $.ajax({ url: "/api/waitlist", method: "GET" }).then(function(
           waitData
         ) {
-          // Here we then log the waitlistData to console, where it will show up as an object.
+          // Log the waitlistData to console.
           console.log(waitData);
           console.log("------------------------------------");
 
@@ -112,9 +113,26 @@
           }
         });
       }
+
+        // This function resets all of the data in our tables. This is intended to let you restart a demo.
+        function clearTable() {
+        alert("Clearing...");
+
+        // Clear the tables on the server and then empty the elements on the client
+        $.ajax({ url: "/api/clear", method: "POST" }).then(function() {
+          $("#waitList").empty();
+          $("#tableList").empty();
+        });
+      }
+
+      $("#clear").on("click", clearTable);
+
+      // Run listTables and listWaitList functions
+      listTables();
+      listWaitList();
       </script>
 
-      
+
       <footer class="footer">
         <div class="container">
           <p>Control Panel</p>
