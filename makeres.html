@@ -7,15 +7,24 @@
 
  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./stlye.css">
 
     <title>Make Your Reservation</title>
   </head>
   <body>
     <div class = 'container'>
-    <div class = 'jumbotron'>
-        <h1>Make your reservations!</h1>
-    </div>
-
+        <div class="container">
+            <div class="jumbotron">
+              <h1 class="display-4 text-center">
+                <span class="glyphicon glyphicon-fire"></span>Hot Restaurant
+              </h1>
+              <hr class="my-4" />
+              <h3 class="text-center">Make your reservation</h3>
+              <div class="text-center">
+                
+              </div>
+            </div>
+            <form>
     Name the reservations will be under: <input type = 'text' id='resname'><br>
     Email: <input type = 'text' id = 'email'><br>
     Phone #: <input type = 'text' id = 'phnumber'><br>
@@ -23,6 +32,7 @@
     Primary Key: <input type = 'text' id = 'key'> <br><br>
 
     <button id='makeres'>Finalize your reservation</button>
+</form>
     </div>
  
     <script
