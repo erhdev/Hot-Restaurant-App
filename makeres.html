@@ -51,7 +51,8 @@
         crossorigin="anonymous">
     </script>
     <script>
-        $('#makeres').on(function(event) {
+        $('#makeres').on('click', function(event) {
+          console.log("hello");
             event.preventDefault();
             var newReservation = {
                 name: $('#resname').val().trim(),
@@ -60,7 +61,7 @@
                 ID: $('#ID').val().trim(),
                 PKey: $('#key').val().trim(),
             }
-            $.post("/reserve", newReservation).then(function(data) {console.log('Reservation Added')  })
+            $.post("/api/tables", newReservation).then(function(data) {console.log('Reservation Added')  })
         })
     </script>
     </body>
