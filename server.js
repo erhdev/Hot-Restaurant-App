@@ -1,7 +1,7 @@
 //const http = require('http');
 const path = require('path');
 const nodemon = require('nodemon');
-const members = require('./app/data/friends');
+//const members = require('./app/data/friends');
 
 const express = require('express');
 const app = express();
@@ -9,8 +9,13 @@ const app = express();
 const mysql = require('mysql');
 require('dotenv').config();
 
+// function Queries() {
+// this.
+    
+// }
+
 // Define the MySQL connection parameters
-var connection = mysql.createConnection({
+let connection = mysql.createConnection({
     host: process.env.DB_HOST,
     port: 3306,
 
@@ -19,8 +24,10 @@ var connection = mysql.createConnection({
 
     // Your password
     password: process.env.DB_PASS,
-    database: 'bamazon'
+    database: 'hotRestaurantApp'
 });
+
+
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({
@@ -36,11 +43,6 @@ app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "/home.html"));
 });
 
-// //get all members
-// app.get('/api/friends', (req, res, next) => {
-//     return res.json(members);
-// });
-
 app.get("/tables", function (req, res) {
     res.sendFile(path.join(__dirname, "/viewres.html"));
 });
@@ -50,6 +52,8 @@ app.post("/api/waitlist", function (req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
     var newRes = req.body;
+
+
 
     // Using a RegEx Pattern to remove spaces from newCharacter
     // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
@@ -64,9 +68,10 @@ app.post("/api/tables", function (req, res) {
     // This works because of our body parsing middleware
     var newFriend = req.body;
 
-    for (let i = 0; i < newFriend.scores.length; i++) {
-        newFriend.scores[i] = parseInt(newFriend.scores[i]);
-    }
+    connection.query(`INSERT INTO hotRestaurantApp (res_name, email, phone, unique_id) VALUES`, function (error, results, fields) {
+        if (error) throw error;
+        console.log('deleted ' + results.affectedRows + ' rows');
+    })
 
     // Using a RegEx Pattern to remove spaces from newCharacter
     // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
@@ -84,5 +89,9 @@ const PORT = process.env.port || 3000;
 <<<<<<< HEAD
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 =======
+<<<<<<< HEAD
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+=======
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 >>>>>>> dc396a7ba3d2decb38fe62deaeba2eac8cd9434e
+>>>>>>> 95aff71bed9b386e5b1fa7ed698b137b336ffd42

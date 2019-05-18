@@ -8,7 +8,7 @@ CREATE TABLE reservations
 (
     res_id INT NOT NULL
     AUTO_INCREMENT,
-    name VARCHAR
+    res_name VARCHAR
     (45) NULL,
     email VARCHAR
     (45) NULL,
@@ -18,5 +18,3 @@ CREATE TABLE reservations
     PRIMARY KEY
     (res_id)
 );
-
-
